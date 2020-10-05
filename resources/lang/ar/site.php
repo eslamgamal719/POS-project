@@ -9,7 +9,9 @@ return [
 
  'dashboard' => 'الرئيسيه',
     'logout' => 'تسجيل الخروج',
-
+     'email' => 'البريد الالكترونى',
+     'password' => 'كلمه المرور',
+    'remember_me' => 'تذكرنى',
     'add' => 'اضف',
     'create' => 'اضافه',
     'read' => 'عرض',
@@ -26,8 +28,8 @@ return [
     'no' => 'لا',
 
     'login' => 'تسجيل الدخول',
-    'remember_me' => 'تذكرني',
-    'password' => 'كلمه المرور',
+
+
     'password_confirmation' => 'تاكيد كلمه المرور',
 
     'added_successfully' => 'تم اضافه البيانات بنجاح',
@@ -39,7 +41,7 @@ return [
 
     'clients' => 'العملاء',
     'client_name' => 'اسم العميل',
-    'phone' => 'التلفون',
+    'phone' => 'التليفون',
     'address' => 'العنوان',
     'previous_orders' => 'الطلبات السابقه',
     'orders' => 'الطلبات',
@@ -49,7 +51,7 @@ return [
     'users' => 'المشرفين',
     'first_name' => 'الاسم الاول',
     'last_name' => 'الاسم الاخير',
-    'email' => 'البريد الاكتروني',
+
     'image' => 'صوره',
     'action' => 'اكشن',
 

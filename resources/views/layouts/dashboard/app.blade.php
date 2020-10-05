@@ -253,8 +253,10 @@
 {{--ckeditor standard--}}
 <script src="{{ asset('dashboard_files/plugins/ckeditor/ckeditor.js') }}"></script>
 
+
 {{--jquery number--}}
 <script src="{{ asset('dashboard_files/js/jquery.number.min.js') }}"></script>
+
 
 {{--print this--}}
 <script src="{{ asset('dashboard_files/js/printThis.js') }}"></script>
@@ -263,9 +265,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{ asset('dashboard_files/plugins/morris/morris.min.js') }}"></script>
 
+
 {{--custom js--}}
 <script src="{{ asset('dashboard_files/js/custom/image_preview.js') }}"></script>
 <script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -308,19 +312,6 @@
 
 
 
-        //image before preview
-        $(".image").change(function() {
-
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('.image-preview').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(this.files[0]); // convert to base64 string
-            }
-        });
 
 
 
@@ -339,6 +330,8 @@
         //
         // });
 
+
+        //To change the direction of ckeditor with the locale lang
         CKEDITOR.config.language =  "{{ app()->getLocale() }}";
 
     });//end of ready
