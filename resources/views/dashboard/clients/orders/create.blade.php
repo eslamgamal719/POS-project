@@ -3,17 +3,18 @@
 @section('content')
 
     <div class="content-wrapper">
-
         <section class="content-header">
-
-            <h1>@lang('site.add_order')</h1>
+            <h1>@lang('site.clients')</h1>
 
             <ol class="breadcrumb">
-                <li><a href="{{ route('dashboard.welcome') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li><a href="{{ route('dashboard.clients.index') }}">@lang('site.clients')</a></li>
-                <li class="active">@lang('site.add_order')</li>
+                <li><a href="{{route('dashboard.welcome')}}" style="margin-left: 5px;"><li class="fa fa-dashboard"></li>@lang('site.dashboard')</a> </li>
+                <li><a href="{{route('dashboard.clients.index')}}" style="margin-left: 5px;">@lang('site.clients')</a> </li>
+             {{--   <li><a href="{{route('dashboard.orders')}}" style="margin-left: 5px;">@lang('site.orders')</a> </li> --}}
+                <li class="active">@lang('site.add')</li>
             </ol>
+
         </section>
+
 
         <section class="content">
 
@@ -32,12 +33,13 @@
                         <div class="box-body">
 
                             @foreach ($categories as $category)
-                                
+
                                 <div class="panel-group">
 
                                     <div class="panel panel-info">
 
                                         <div class="panel-heading">
+
                                             <h4 class="panel-title">
                                                 <a data-toggle="collapse" href="#{{ str_replace(' ', '-', $category->name) }}">{{ $category->name }}</a>
                                             </h4>
@@ -130,6 +132,7 @@
 
                                     </tbody>
 
+
                                 </table><!-- end of table -->
 
                                 <h4>@lang('site.total') : <span class="total-price">0</span></h4>
@@ -141,6 +144,9 @@
                         </div><!-- end of box body -->
 
                     </div><!-- end of box -->
+
+
+
 
                     @if ($client->orders->count() > 0)
 

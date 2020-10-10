@@ -23,11 +23,13 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::whereRoleIs('admin')->when($request->search, function ($query) use ($request) {
+        $users = User::whereRoleIs('admin')->where(function($q) use ($request) {
 
-            return $query->where('first_name', 'like', '%' . $request->search . '%')
-                ->orWhere('last_name', 'like', '%' . $request->search . '%');
+            return  $q->when($request->search, function($query) use ($request) {
 
+                return $query->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%');
+            });
         })->latest()->paginate(6);
 
         return view('dashboard.users.index', compact('users'));
@@ -46,7 +48,7 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:users,email',
-            'image' => 'image',
+            'image' => 'image|mimes:jpg,jpeg,png',
             'password' => 'required|confirmed',
             'permissions' => 'required|min:1'
         ]);
@@ -82,7 +84,7 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => ['required', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', Rule::unique('users','email')->ignore($user->id)],
             'image' => 'image',
             'permissions' => 'required|min:1'
         ]);
@@ -92,7 +94,7 @@ class UserController extends Controller
         if ($request->image) {
             if ($user->image != 'avatar.jpeg') {
 
-                Storage::disk('public_uploads')->delete($user->image);
+                Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
 
             }
 
@@ -115,7 +117,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->image != 'avatar.jpeg') {
-            Storage::disk('public_uploads')->delete($user->image);
+            Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
         }
         $user->delete();
         session()->flash('success', __('site.deleted successfully'));
