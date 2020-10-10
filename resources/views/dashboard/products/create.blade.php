@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-group">
-                            <img src="{{asset('uploads/product_images/default.jpeg')}}" style="width: 100px;" class="img-thumbnail image-preview" alt="">
+                            <img src="{{asset('uploads/product_images/default.jpeg')}}" style="width: 100px;"  class="img-thumbnail image-preview" alt="">
                         </div>
 
 

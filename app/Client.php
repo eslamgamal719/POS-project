@@ -15,7 +15,12 @@ class Client extends Model
     ];
 
 
+    public function getNameAttribute($val) {
+        return ucfirst($val);
+    }
+
+
     public function orders() {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Order::class);
     }
 }

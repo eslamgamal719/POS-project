@@ -13,7 +13,7 @@ $(document).ready(function () {
             var html =
                 `<tr>
                 <td>${name}</td>
-                <td><input type="number"  name="quantities[]" data-price="${price}" class="form-control input-sm product-quantity" min="1" value="1"></td>
+                <td><input type="number"  name="products[${id}][quantity]" data-price="${price}" class="form-control input-sm product-quantity" min="1" value="1"></td>
                 <td class="product-price">${price}</td>
                 <td><button class="btn btn-danger btn-sm remove-product-button" data-id="${id}"><span class="fa fa-trash"></span></button></td>
             </tr>`;
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
         var quantity = Number($(this).val());
 
-        var unitPrice = $(this).data('price');
+        var unitPrice = parseFloat($(this).data('price').replace(/,/g, ''));
 
         $(this).closest('tr').find('.product-price').html($.number(quantity * unitPrice, 2));
 
@@ -59,10 +59,44 @@ $(document).ready(function () {
         $(this).closest('tr').remove();
         $('#product-' + id).removeClass('btn-default disabled').addClass('btn-success');
 
+        // to calculate total price
+        calculateTotal();
     });
 
-    // to calculate total price
-     calculateTotal();
+
+
+     //list all order products (show order details)
+    $('.order-products').on('click', function(e) {
+
+        e.preventDefault();
+
+        $('#loading').css('display', 'flex');
+
+        var url = $(this).data('url');
+        var method = $(this).data('method');
+
+        $.ajax({
+            url: url,
+            method: method,
+            success: function(data) {
+
+                $('#loading').css('display', 'none');
+                $('#order-product-list').empty().append(data);
+            }
+        })
+
+    }); //end of order product
+
+
+
+    $(document).on('click', '.print-btn' , function() {
+
+        $('#print-area').printThis();
+
+    });
+
+
+
 
 
 
@@ -85,7 +119,17 @@ function calculateTotal() {
 
         $('.total-price').html($.number(price, 2));
 
+        //check if price > 0
+        if(price > 0) {
+
+                  $('#add-order-form-btn').removeClass('disabled');
+
+        }else {
+                  $('#add-order-form-btn').addClass('disabled');
+        }
+
     } // end of calculate total
+
 
 
 
